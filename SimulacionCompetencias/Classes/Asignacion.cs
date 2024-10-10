@@ -12,7 +12,7 @@ namespace SimulacionCompetencias.Classes
         public double longitud { get; set; }
         public int idPunto { get; set; }
         public bool activo { get; set; } //Para ver si hay o no un arbol
-        public string especie { get; set; }
+        public int especie { get; set; }
         public Asignacion() { }
         public Asignacion(Asignacion a_asignacion)
         {

@@ -25,20 +25,23 @@ namespace SimulacionCompetencias
             string numeroColumna1 = "1";
             string numeroColumna2 = "2";
             string numeroColumna3 = "3";
+            string numeroColumna4 = "4";
 
             //Paso 1: Determinar la cantidad de columnas
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add(numeroColumna1, "Id");
             dataGridView1.Columns.Add(numeroColumna2, "Latitud");
             dataGridView1.Columns.Add(numeroColumna3, "Longitud");
+            dataGridView1.Columns.Add(numeroColumna4, "Especie");
 
             //Paso 2: Recorrer el grid para cada fila y llenar de valores esperados
             for (int i = 0; i < lista.Count; i++)
             {
                 dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = (lista[i].idPunto).ToString();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = lista[i].idPunto.ToString();
                 dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna2) - 1].Value = lista[i].latitud.ToString();
                 dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna3) - 1].Value = lista[i].longitud.ToString();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna4) - 1].Value = lista[i].especie.ToString();
             }
         }
         public void descargarExcel(DataGridView data)
