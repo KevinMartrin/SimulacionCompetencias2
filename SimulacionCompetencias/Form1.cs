@@ -105,5 +105,6 @@ namespace SimulacionCompetencias
         {
             descargarExcel(dataGridView1);
         }
+
     }
 }
