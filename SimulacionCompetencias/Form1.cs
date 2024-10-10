@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimulacionCompetencias.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,62 @@ namespace SimulacionCompetencias
             InitializeComponent();
         }
 
+        // ------------Funciones-------------
+        public void llenarGrid(List<Asignacion> lista)
+        {
+            //Paso 0: Numero de columnas
+            string numeroColumna1 = "1";
+            string numeroColumna2 = "2";
+            string numeroColumna3 = "3";
+
+            //Paso 1: Determinar la cantidad de columnas
+            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Add(numeroColumna1, "Id");
+            dataGridView1.Columns.Add(numeroColumna2, "Latitud");
+            dataGridView1.Columns.Add(numeroColumna3, "Longitud");
+
+            //Paso 2: Recorrer el grid para cada fila y llenar de valores esperados
+            for (int i = 0; i < lista.Count; i++)
+            {
+                dataGridView1.Rows.Add();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = (lista[i].idPunto).ToString();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna2) - 1].Value = lista[i].latitud.ToString();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna3) - 1].Value = lista[i].longitud.ToString();
+            }
+        }
+        public void descargarExcel(DataGridView data)
+        {
+            //Paso 0: Instalar complemento de Excel
+            Microsoft.Office.Interop.Excel.Application exportarExcel = new Microsoft.Office.Interop.Excel.Application();
+            exportarExcel.Application.Workbooks.Add(true);
+            int indiceColumna = 0;
+
+            //Paso 1: Contruir columnas y los nombres de las cabeceras
+            foreach (DataGridViewColumn columna in data.Columns)
+            {
+                indiceColumna++;
+                exportarExcel.Cells[1, indiceColumna] = columna.HeaderText;
+            }
+
+            //Paso 2: Construir filas y llenar valores
+            int indiceFilas = 0;
+            foreach (DataGridViewRow fila in data.Rows)
+            {
+                indiceFilas++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn columna in data.Columns)
+                {
+                    indiceColumna++;
+                    exportarExcel.Cells[indiceFilas + 1, indiceColumna] = fila.Cells[columna.Name].Value;
+                }
+            }
+
+            //Paso 3: Visibilidad
+            exportarExcel.Visible = true;
+        }
+
+        // -----------Objetos en el form----------
+
         private void button1_Click(object sender, EventArgs e)
         {
             //Paso 0: Condicion de vacio
@@ -33,6 +90,17 @@ namespace SimulacionCompetencias
 
             //Paso 2: Llamar al algoritmo
             GeneradorAleatorio generador = new GeneradorAleatorio();
+
+            //Paso 3: LLamar metodo principal
+            List<Asignacion> listaSalida = generador.CrearListaOrigen(puntosTotales, minimo, maximo);
+
+            //Paso 4: Llenar grid
+            llenarGrid(listaSalida);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            descargarExcel(dataGridView1);
         }
     }
 }
