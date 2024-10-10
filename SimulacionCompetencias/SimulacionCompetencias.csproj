@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\Arco.cs" />
     <Compile Include="Classes\Asignacion.cs" />
+    <Compile Include="Classes\GeneradorAleatorio.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

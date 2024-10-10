@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace SimulacionCompetencias.Classes
 {
-    internal class Arco
+    public class Arco
     {
+        public int idInicio { get; set; }
+        public int idFinal { get; set; }
+        public double distancia { get; set; }
+        public double competitividad { get; set; }
+
+        public Arco() { }
+        public Arco(Arco a_arco)
+        {
+            idInicio = a_arco.idInicio;
+            idFinal = a_arco.idFinal;
+            distancia = a_arco.distancia;
+            competitividad = a_arco.competitividad;
+        }
     }
 }
