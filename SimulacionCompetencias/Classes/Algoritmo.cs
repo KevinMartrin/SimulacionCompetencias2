@@ -56,7 +56,7 @@ namespace SimulacionCompetencias.Classes
                 col1 = col4;
                 c++;
             }
-            return lista[c / 2];
+            return col1;
         }
 
     }
