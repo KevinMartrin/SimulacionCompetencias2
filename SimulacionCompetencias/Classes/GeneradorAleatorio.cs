@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SimulacionCompetencias;
 
 namespace SimulacionCompetencias.Classes
 {
@@ -11,15 +12,15 @@ namespace SimulacionCompetencias.Classes
         public GeneradorAleatorio() { }
         public List<Asignacion> CrearListaOrigen(int puntosTotales, int limiteInferior, int limiteSuperior)
         {
-            Random aleatorio = new Random();
             List <Asignacion > listaAsignacion = new List<Asignacion>();
             for (int i = 0; i < puntosTotales; i++)
             {
                 Asignacion generador = new Asignacion();
-                generador.latitud = aleatorio.Next(limiteInferior, limiteSuperior);
-                generador.longitud = aleatorio.Next(limiteInferior, limiteSuperior);
+                Algoritmo aleatorio = new Algoritmo();
+                generador.latitud = aleatorio.CuadradoMedio(limiteInferior, limiteSuperior);
+                generador.longitud = aleatorio.CuadradoMedio(limiteInferior, limiteSuperior);
                 generador.idPunto = i;
-                generador.especie = aleatorio.Next(0, 10);
+                generador.especie = aleatorio.CuadradoMedio(1, 11); ;
                 generador.activo = false;
 
                 listaAsignacion.Add(generador);
