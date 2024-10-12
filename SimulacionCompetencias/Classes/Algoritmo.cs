@@ -9,27 +9,33 @@ namespace SimulacionCompetencias.Classes
     public class Algoritmo
     {
         public Algoritmo() { }
-        public int CuadradoMedio(int min, int max)
+        public int CuadradoMedio(int min, int max, Random numero_aleatorio)
         {
-            Random aleatorio = new Random();
-
             List<int> lista = new List<int>();
 
-            int col1 = aleatorio.Next(min, max);
+            int num_aleatorio = numero_aleatorio.Next(min, max);
+            int col1 = num_aleatorio;
             int n = Convert.ToString(col1).Length;
             int c = 0;
-            int col4;
-            for (int i = 0; i < 10; i++)
+            int col4 = col1;
+            while (c < 1000 && !(col4 >= min && col4 <= max))
             {
                 int col2 = col1 * col1;
-                int col3 = Convert.ToInt32(Convert.ToString(col2).Substring(1, Convert.ToString(col2).Length - 1));
-                if (Convert.ToString(col3).Length <= n)
+                if (Convert.ToString(col2).Length <= 2)
                 {
-                    col4 = col3;
+                    col4 = col2;
                 }
                 else
                 {
-                    col4 = Convert.ToInt32(Convert.ToString(col3).Substring(0, Convert.ToString(col3).Length-1));
+                    int col3 = Convert.ToInt32(Convert.ToString(col2).Substring(1, Convert.ToString(col2).Length - 1));
+                    if (Convert.ToString(col3).Length <= 1)
+                    {
+                        col4 = col3;
+                    }
+                    else
+                    {
+                        col4 = Convert.ToInt32(Convert.ToString(col3).Substring(0, Convert.ToString(col3).Length - 1));
+                    }
                 }
 
                 lista.Add(col4);
@@ -37,7 +43,17 @@ namespace SimulacionCompetencias.Classes
                 col1 = col4;
                 c++;
             }
-            return lista[c / 2];
+
+            int numerito = num_aleatorio;
+            foreach (int i in lista)
+            {
+                if (i >= min && i <= max)
+                {
+                    numerito = i;
+                }
+            }
+
+            return numerito;
         }
 
     }
