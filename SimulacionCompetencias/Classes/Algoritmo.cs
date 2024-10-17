@@ -56,5 +56,39 @@ namespace SimulacionCompetencias.Classes
             return numerito;
         }
 
+        public double CongruencialLineal(int p_semilla, int min, int max)
+        {
+            int x0 = p_semilla;
+            int a = 7;
+            Random rand = new Random(p_semilla);
+            int m = rand.Next(p_semilla, 3 * p_semilla + 20);
+            int c = 21;
+
+            List<int> lista = new List<int>();
+
+            int x_nueva = 0;
+            for (int i = 0; i <= 15; i++)
+            {
+                x_nueva = (a * x0 + c) % m;
+                lista.Add(x_nueva);
+                x0 = x_nueva;
+            }
+
+            //int ale = 0;
+            //for (int i = 0; i < lista.Count; i++)
+            //{
+                //if (lista[lista.Count - 1 - i] != 0)
+                //{
+                    //ale = lista[lista.Count - 1 - i];
+                    //break;
+                //}
+            //}
+
+            int ale = lista[lista.Count - 1];
+            double ale_norm = ale / m;
+            double ale_final = min + ale_norm * (max-min);
+            return ale_norm;
+        }
+
     }
 }

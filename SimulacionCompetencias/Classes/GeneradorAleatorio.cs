@@ -10,18 +10,16 @@ namespace SimulacionCompetencias.Classes
     public class GeneradorAleatorio
     {
         public GeneradorAleatorio() { }
-        public List<Asignacion> CrearListaOrigen(int puntosTotales, int limiteInferior, int limiteSuperior)
+        public List<Asignacion> CrearListaOrigen(int puntosTotales, int semilla, int limiteInferior, int limiteSuperior)
         {
             List <Asignacion > listaAsignacion = new List<Asignacion>();
-            Random rand = new Random();
             for (int i = 0; i < puntosTotales; i++)
             {
                 Asignacion generador = new Asignacion();
                 Algoritmo aleatorio = new Algoritmo();
-                generador.latitud = aleatorio.CuadradoMedio(limiteInferior, limiteSuperior, rand);
-                generador.longitud = aleatorio.CuadradoMedio(limiteInferior, limiteSuperior, rand);
+                generador.latitud = aleatorio.CongruencialLineal(semilla,limiteInferior,limiteSuperior);
+                generador.longitud = aleatorio.CongruencialLineal(semilla+1, limiteInferior, limiteSuperior);
                 generador.idPunto = i;
-                generador.especie = aleatorio.CuadradoMedio(1, 11, rand); ;
                 generador.activo = false;
 
                 listaAsignacion.Add(generador);

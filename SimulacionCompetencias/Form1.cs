@@ -88,6 +88,7 @@ namespace SimulacionCompetencias
 
             //Paso 1: Inicializacion de parametros
             int puntosTotales = Convert.ToInt32(textBox1.Text);
+            int semilla = Convert.ToInt32(textBox4.Text);
             int minimo = Convert.ToInt32(textBox2.Text);
             int maximo = Convert.ToInt32(textBox3.Text);
 
@@ -95,7 +96,7 @@ namespace SimulacionCompetencias
             GeneradorAleatorio generador = new GeneradorAleatorio();
 
             //Paso 3: LLamar metodo principal
-            List<Asignacion> listaSalida = generador.CrearListaOrigen(puntosTotales, minimo, maximo);
+            List<Asignacion> listaSalida = generador.CrearListaOrigen(puntosTotales, semilla, minimo, maximo);
 
             //Paso 4: Llenar grid
             llenarGrid(listaSalida);
@@ -112,6 +113,16 @@ namespace SimulacionCompetencias
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
         }
